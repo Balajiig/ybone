@@ -1,6 +1,8 @@
-runtime: nodejs20
+runtime: nodejs20  # Use the appropriate Node.js version supported by App Engine
+
+env_variables:
+  NODE_ENV: production
 
 handlers:
 - url: /.*
-  static_files: .next/static/index.html
-  upload: .next/static/index.html
+  script: auto

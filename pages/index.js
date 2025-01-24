@@ -1,41 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Image from 'next/image';
 
 // Reusable Components
 const Header = () => (
   <header style={styles.header}>
     <div style={styles.logoContainer}>
-      <img src="/images/logo.webp" alt="YB One Logo" style={styles.logo} />
+      <Image
+        src="/images/logo.webp"
+        alt="YB One Logo"
+        width={40}
+        height={40}
+        style={styles.logo}
+      />
       <span style={styles.brandName}>YB One</span>
     </div>
   </header>
 );
 
-const HeroSection = () => {
-  const handleContactClick = () => {
-    const subject = encodeURIComponent('Inquiry from YB One Website');
-    const body = encodeURIComponent('Hello, I would like to discuss...');
-    window.location.href = `mailto:sales@ybonesolutions.com?subject=${subject}&body=${body}`;
-  };
-
-  return (
-    <section style={styles.hero}>
-      <div style={styles.heroContent}>
-        <h1 style={styles.heroTitle}>Top 1% Leaders for Your Business</h1>
-        <p style={styles.heroSubtitle}>
-          Access the same experts who lead top companies—without fixed salaries.
-        </p>
-        <p style={styles.highlightText}>Grow smarter, pay smarter.</p>
-        <button
-          style={styles.ctaButton}
-          aria-label="Contact Us"
-          onClick={handleContactClick}
-        >
-          Contact Us
-        </button>
-      </div>
-    </section>
-  );
-};
+const HeroSection = () => (
+  <section style={styles.hero}>
+    <div style={styles.heroContent}>
+      <h1 style={styles.heroTitle}>Top 1% Leaders for Your Business</h1>
+      <p style={styles.heroSubtitle}>
+        Access the same elite talent who drive market leaders—without fixed salaries.
+      </p>
+      <p style={styles.highlightText}>Grow smarter, Pay smarter.</p>
+    </div>
+  </section>
+);
 
 const ServiceCard = ({ title, description }) => (
   <div style={styles.serviceCard}>
@@ -75,6 +67,17 @@ const Footer = () => (
 
 // Main Component
 export default function Home() {
+  useEffect(() => {
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = globalStyles;
+    document.head.appendChild(styleSheet);
+
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []);
+
   return (
     <div style={styles.container}>
       <Header />
@@ -132,6 +135,13 @@ export default function Home() {
       <section style={styles.ctaSection}>
         <h2 style={styles.ctaTitle}>Ready to Transform Your Product?</h2>
         <p style={styles.ctaSubtitle}>Let’s build something extraordinary together.</p>
+        <button
+          style={styles.ctaButton}
+          aria-label="Contact Us"
+          onClick={() => window.open('https://www.linkedin.com/company/yb-one', '_blank')}
+        >
+          Contact Us
+        </button>
       </section>
 
       <Footer />
@@ -187,29 +197,30 @@ const styles = {
   },
   heroSubtitle: {
     fontSize: '1.2rem',
-    marginBottom: '10px',
+    marginBottom: '20px',
     color: '#E0E0E0',
     animation: 'fadeIn 3s ease-in-out',
   },
   highlightText: {
     fontSize: '1.2rem',
-    marginBottom: '40px',
-    color: '#FF6B35',
-    fontWeight: 'bold',
-    animation: 'fadeIn 3s ease-in-out',
+    color: '#FFFFFF', // White text for contrast
+    display: 'inline-block',
+    padding: '5px 10px',
+    borderRadius: '5px',
+    margin: '10px 0',
+    textShadow: '0 0 5px #FF6B35, 0 0 10px #FF6B35, 0 0 20px #FF6B35', // Glowing orange effect
+    animation: 'glow 2s infinite alternate', // Glow animation
   },
   ctaButton: {
-    backgroundColor: 'rgba(255, 107, 53, 0.8)',
+    backgroundColor: '#FF6B35',
     color: '#FFFFFF',
     padding: '15px 30px',
     border: 'none',
-    borderRadius: '25px',
+    borderRadius: '30px',
     fontSize: '1rem',
     cursor: 'pointer',
     transition: 'background 0.3s ease, transform 0.3s ease',
     animation: 'fadeIn 4s ease-in-out',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
   },
   section: {
     padding: '80px 20px',
@@ -333,13 +344,22 @@ const globalStyles = `
     }
   }
 
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #FF6B35, 0 0 10px #FF6B35, 0 0 20px #FF6B35;
+    }
+    to {
+      text-shadow: 0 0 10px #FF6B35, 0 0 20px #FF6B35, 0 0 30px #FF6B35;
+    }
+  }
+
   .serviceCard:hover, .testimonialCard:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
   .ctaButton:hover {
-    background: rgba(255, 140, 90, 0.8);
+    background: #FF8C5A;
     transform: scale(1.05);
   }
 
@@ -347,9 +367,3 @@ const globalStyles = `
     color: #FF8C5A;
   }
 `;
-
-// Inject Global Styles
-const styleSheet = document.createElement('style');
-styleSheet.type = 'text/css';
-styleSheet.innerText = globalStyles;
-document.head.appendChild(styleSheet);
