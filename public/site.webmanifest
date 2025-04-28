@@ -1,0 +1,23 @@
+{
+    "name": "YB One Solutions",
+    "short_name": "YBOne",
+    "description": "Top 1% Business Consulting, Marketing Consulting, and Digital Marketing Services",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#FF6600",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "/favicon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/favicon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

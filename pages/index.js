@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
+import SeoHead from '@/components/SEO'; 
+
 
 // Reusable Components
 const Header = () => (
@@ -80,6 +82,7 @@ export default function Home() {
 
   return (
     <div style={styles.container}>
+       <SeoHead />
       <Header />
       <HeroSection />
 
